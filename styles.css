@@ -1,0 +1,50 @@
+
+:root{
+    
+}
+
+*, ::before, ::after{
+    margin: 0 auto;
+    padding: 0 auto;
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    margin: 0;
+}
+
+.container{
+text-align: center;
+}
+
+.progress-container{
+    /* background-color: aqua; */
+    display: flex;
+    width: 350px;
+    max-width: 100%;
+    justify-content: space-between;
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.progress{
+    position: absolute;
+    top: 50%;
+    left: 0;
+    background-color: chocolate;
+    transform: translateY(-50%);
+    height: 4px;
+    width: 0%;
+    z-index: -1;
+    
+}
+
+.action{
+    display: flex;
+}
