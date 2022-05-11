@@ -1,24 +1,49 @@
-const progressBar = document.querySelector('.progress');
-let multi = 1;
+const progress = document.querySelector('.progress');
+const prev = document.querySelector('.prev');
+const next = document.querySelector('.next');
+const circles = document.querySelectorAll('.circle');
 
-function trackProgress(){
-    progressBar.classList.add('dynamicProgress');
 
-}
-function incProgress(){
-    if(multi === 9){
-        return
+let currentActive = 1;
+
+next.addEventListener('click', ()=>{
+    currentActive ++;
+
+    if(currentActive > circles.length){
+        currentActive = circles.length;
     }
-    const styles = [`
-    .dynamicProgress {
-        width: calc(42.5px*${multi});
-        transition: width 1s ease-out;
-    }
-    `]
-    trackProgress();
-    const styleSheet = document.createElement('style');
-    styleSheet.innerText = styles;
-    document.head.appendChild(styleSheet);
-    multi += 2;
     
+    update()
+});
+prev.addEventListener('click', ()=>{
+    currentActive --;
+
+    if(currentActive < 1){
+        currentActive = 1;
+    }
+    
+    update()
+});
+
+function update(){
+    circles.forEach((circle, idx) => {
+        if(idx < currentActive){
+            circle.classList.add('active');
+        } else {
+            circle.classList.remove('active');
+        }
+    })
+
+    const actives = document.querySelectorAll('.active');
+    progress.style.width = ((actives.length -1) /(circles.length - 1)) * 100 + "%";
+
+    if(currentActive === 1) {
+        prev.disabled = true;
+    } else if(currentActive === circles.length) {
+        next.disabled = true;
+    } else {
+        next.disabled = false;
+        prev.disabled = false;
+    }
+
 }
